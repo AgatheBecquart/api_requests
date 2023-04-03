@@ -65,10 +65,11 @@ if response.status_code == 200:
 
     # Afficher les données sous forme de tableau
     st.write("<h3>Prévisions pour les 5 prochains jours à {} :</h3>".format(selected_city), unsafe_allow_html=True)
-    st.write("<table><thead><tr><th>Date et heure</th><th>Température (°C)</th><th>Humidité (%)</th><th>Vitesse du vent (m/s)</th><th>Description du temps</th></tr></thead><tbody>", unsafe_allow_html=True)
+    table = "<table><thead><tr><th style='text-align:left;'>Date et heure</th><th style='text-align:center;'>Température (°C)</th><th style='text-align:center;'>Humidité (%)</th><th style='text-align:center;'>Vitesse du vent (m/s)</th><th style='text-align:left;'>Description du temps</th></tr></thead><tbody>"
     for forecast in forecast_data:
-        st.write("<tr><td>{}</td><td>{:.2f}</td><td>{}</td><td>{}</td><td>{}</td></tr>".format(forecast[0], forecast[1], forecast[2], forecast[3], forecast[4]), unsafe_allow_html=True)
-    st.write("</tbody></table>", unsafe_allow_html=True)
+        table += "<tr><td style='text-align:left;'>{}</td><td style='text-align:center;'>{:.2f}</td><td style='text-align:center;'>{}</td><td style='text-align:center;'>{}</td><td style='text-align:left;'>{}</td></tr>".format(forecast[0], forecast[1], forecast[2], forecast[3], forecast[4])
+    table += "</tbody></table>"
+    st.write(table, unsafe_allow_html=True)
 else:
     st.write(f"Erreur : la requête a échoué avec le code d'état {response.status_code}")
 
